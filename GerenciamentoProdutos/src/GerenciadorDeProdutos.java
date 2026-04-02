@@ -1,91 +1,69 @@
-public class GerenciadorDeProdutos {
+import java.util.ArrayList;
 
-    public static void main(String[] args) {
+public class GerenciadorProduto {
 
-        import java.util.ArrayList;
+    ArrayList<Produto> listaProdutos = new ArrayList<>();
 
-        public class GerenciadorProduto {
-
-            ArrayList<String> listaProdutos = new ArrayList<>();
-
-            public void cadastrarProduto(String nomeProduto) {
-                try {
-                    // verificar duplicado sem contains
-                    for (String produto : listaProdutos) {
-                        if (produto.equals(nomeProduto)) {
-                            System.out.println("\nEsse produto já está cadastrado");
-                            return;
-                        }
-                    }
-
-                    listaProdutos.add(nomeProduto);
-                    System.out.printf("\nO produto: %s foi cadastrado com sucesso\n", nomeProduto);
-
-                } catch (Exception e) {
-                    System.out.println("\nErro ao cadastrar produto: " + e);
-                }
+    public void cadastrarProduto(String nomeProduto, double preco) {
+        for (Produto produto : listaProdutos) {
+            if (produto.nome.equals(nomeProduto)) {
+                System.out.println("\nEsse produto já está cadastrado");
+                return;
             }
+        }
 
-            public void listarProduto() {
-                try {
-                    // verificar se está vazia sem isEmpty
-                    if (listaProdutos.size() == 0) {
-                        System.out.println("\nProduto de produto vazia");
-                        return;
-                    }
+        listaProdutos.add(new Produto(nomeProduto, preco));
+        System.out.println("\nProduto cadastrado com sucesso");
+    }
 
-                    for (String produto : listaProdutos) {
-                        System.out.println(produto);
-                    }
+    public void listarProduto() {
+        if (listaProdutos.size() == 0) {
+            System.out.println("\nLista vazia");
+            return;
+        }
 
-                } catch (Exception e) {
-                    System.out.println("\nErro ao listar produto: " + e);
-                }
+        for (Produto produto : listaProdutos) {
+            System.out.println("Nome: " + produto.nome + " | Preço: R$ " + produto.preco);
+        }
+    }
+
+    public void atualizarProduto(String nomeAntigo, String nomeNovo, double novoPreco) {
+        boolean encontrado = false;
+
+        for (int i = 0; i < listaProdutos.size(); i++) {
+            if (listaProdutos.get(i).nome.equals(nomeAntigo)) {
+                listaProdutos.get(i).nome = nomeNovo;
+                listaProdutos.get(i).preco = novoPreco;
+                encontrado = true;
+                System.out.println("\nProduto atualizado com sucesso");
+                break;
             }
+        }
 
-            public void atualizarProduto(String nomeAntigo, String nomeNovo) {
-                try {
-                    boolean encontrado = false;
+        if (!encontrado) {
+            System.out.println("\nProduto não encontrado");
+        }
+    }
 
-                    for (int i = 0; i < listaProduto.size(); i++) {
-                        if (listarProduto().get(i).equals(nomeAntigo)) {
-                            listaProduto.set(i, nomeNovo);
-                            encontrado = true;
-                            System.out.println("\nProduto atualizado com sucesso");
-                            break;
-                        }
-                    }
+    public void deletarProduto(String nomeProduto) {
+        boolean removido = false;
 
-                    if (!encontrado) {
-                        System.out.println("\nProduto não encontrado");
-                    }
-
-                } catch (Exception e) {
-                    System.out.println("\nErro ao atualizar livro: " + e);
-                }
+        for (int i = 0; i < listaProdutos.size(); i++) {
+            if (listaProdutos.get(i).nome.equals(nomeProduto)) {
+                listaProdutos.remove(i);
+                removido = true;
+                System.out.println("\nProduto deletado com sucesso");
+                break;
             }
+        }
 
-            public void deletarProduto(String deletarProduto) {
-                try {
-                    boolean removido = false;
-
-                    for (int i = 0; i < listaProduto.size(); i++) {
-                        if (listaProduto.get(i).equals(deletarProduto)) {
-                            listaProduto.remove(i);
-                            removido = true;
-                            System.out.println("\nProduto deletado com sucesso");
-                            break;
-                        }
-                    }
-
-                    if (!removido) {
-                        System.out.println("\nProduto não encontrado");
-                    }
-
-                } catch (Exception e) {
-                    System.out.println("\nErro ao deletar Produto: " + e);
-                }
-            }
+        if (!removido) {
+            System.out.println("\nProduto não encontrado");
         }
     }
 }
+
+
+
+
+        sc.close();
