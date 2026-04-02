@@ -4,64 +4,51 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        GerenciadorProduto gProduto = new GerenciadorProduto();
-        boolean continuarRodando = true;
+        GerenciadorProduto gp = new GerenciadorProduto();
+        boolean rodando = true;
 
-        do {
-            System.out.println("\n=== Sistema de Gerenciamento de Produto ===\n");
-            System.out.println("(1) - Cadastrar Produto");
-            System.out.println("(2) - Listar Produto");
-            System.out.println("(3) - Atualizar Produto");
-            System.out.println("(4) - Deletar Produto");
-            System.out.println("(5) - Sair");
+        while (rodando) {
+            System.out.println("\n1 - Cadastrar");
+            System.out.println("2 - Listar");
+            System.out.println("3 - Atualizar");
+            System.out.println("4 - Deletar");
+            System.out.println("5 - Sair");
 
-            int opcaoUsuario = sc.nextInt();
+            int op = sc.nextInt();
             sc.nextLine();
 
-            switch (opcaoUsuario) {
-
+            switch (op) {
                 case 1:
-                    System.out.print("Nome: ");
-                    String nome = sc.nextLine();
-
-                    System.out.print("Preço: ");
-                    double preco = sc.nextDouble();
-                    sc.nextLine();
-
-                    gProduto.cadastrarProduto(nome, preco);
+                    System.out.print("Digite o nome do produto: ");
+                    String nomeCadastro = sc.nextLine();
+                    gp.cadastrarProduto(nomeCadastro);
                     break;
 
                 case 2:
-                    gProduto.listarProduto();
+                    gp.listarProdutos();
                     break;
 
                 case 3:
-                    System.out.print("Produto antigo: ");
-                    String antigo = sc.nextLine();
-
-                    System.out.print("Novo nome: ");
-                    String novo = sc.nextLine();
-
-                    System.out.print("Novo preço: ");
-                    double novoPreco = sc.nextDouble();
-                    sc.nextLine();
-
-                    gProduto.atualizarProduto(antigo, novo, novoPreco);
+                    System.out.print("Digite o nome do produto: ");
+                    String nomeAtualizar = sc.nextLine();
+                    gp.atualizarProduto(nomeAtualizar);
                     break;
 
                 case 4:
-                    System.out.print("Produto: ");
-                    gProduto.deletarProduto(sc.nextLine());
+                    System.out.print("Digite o nome do produto: ");
+                    String nomeDeletar = sc.nextLine();
+                    gp.deletarProduto(nomeDeletar);
                     break;
 
                 case 5:
-                    continuarRodando = false;
+                    rodando = false;
                     break;
 
                 default:
                     System.out.println("Opção inválida");
             }
+        }
 
-        } while (continuarRodando);
-
-
+        sc.close();
+    }
+}
